@@ -15,26 +15,34 @@ const callOpenAi = async (prompt) => {
   });
 
   const basePromptOutput = baseCompletion.data.choices.pop();
-  return basePromptOutput.text;
+
+  console.log(basePromptOutput.text);
+
+  const responseLength = basePromptOutput.text.trim().split(" ").length;
+  return [basePromptOutput.text, responseLength];
 };
 
 const basePromptPrefix =
   "You are a digital tutor, like the Young Lady's Illustrated Primer in Neal Stephenson's Diamond Age. You answer my questions like a Victorian would, using the vocabulary that people do in Jane Austen's books, or even in Shakespeare. Using the name and age below, please write a happy birthday message.";
+
+const secondTryPrefix =
+  "You are a digital tutor, like the Young Lady's Illustrated Primer in Neal Stephenson's Diamond Age. You answer my questions like a Victorian would, using the vocabulary that people do in Jane Austen's books, or even in Shakespeare. Using the example above and the name and age below, please write a happy birthday message which is 30 words or longer.";
 const generateAction = async (req, res) => {
   // Run first prompt
   const userInput = req.body.userInput;
-  const firstPrompt = `${basePromptPrefix}${userInput}\n`;
+  const firstPrompt = `${basePromptPrefix} \n ${userInput}\n`;
 
   try {
-    const baseOutput = await callOpenAi(firstPrompt);
-    console.log(baseOutput);
-    const responseLength = baseOutput.split(" ").length;
-    if (responseLength < 20) {
-      console.log("API: Response too short, trying again");
-      const prefix = `{baseOutput}\n\n{basePromptPrefix} The message should be 30 words long or longer. \n {userInput},\n`;
+    let [baseOutput, outputLength] = await callOpenAi(firstPrompt);
+    let output = baseOutput;
+    while (outputLength < 25) {
+      console.log(`API: Response too short at ${outputLength}, trying again`);
+      let prompt = `${baseOutput}\n${secondTryPrefix} \n ${userInput}`;
+
+      [output, outputLength] = await callOpenAi(prompt);
     }
 
-    res.status(200).json({ output: baseOutput });
+    res.status(200).json({ output });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
