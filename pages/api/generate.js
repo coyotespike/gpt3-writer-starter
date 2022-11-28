@@ -15,11 +15,16 @@ const callOpenAi = async (prompt) => {
   });
 
   const basePromptOutput = baseCompletion.data.choices.pop();
+  const trimmedResponse = basePromptOutput.text.trim();
 
-  console.log(basePromptOutput.text);
+  const responseLength = trimmedResponse.split(" ").length;
+  return [trimmedResponse, responseLength];
+};
 
-  const responseLength = basePromptOutput.text.trim().split(" ").length;
-  return [basePromptOutput.text, responseLength];
+const openAIFormatter = (instructions, prompt, example) => {
+  return example
+    ? `EXAMPLE: ${example}\n INSTRUCTIONS: ${instructions}\n PROMPT: ${prompt}`
+    : `INSTRUCTIONS: ${instructions}\n PROMPT: ${prompt}`;
 };
 
 const basePromptPrefix =
@@ -27,19 +32,24 @@ const basePromptPrefix =
 
 const secondTryPrefix =
   "You are a digital tutor, like the Young Lady's Illustrated Primer in Neal Stephenson's Diamond Age. You answer my questions like a Victorian would, using the vocabulary that people do in Jane Austen's books, or even in Shakespeare. Using the example above and the name and age below, please write a happy birthday message which is 30 words or longer.";
+
 const generateAction = async (req, res) => {
-  // Run first prompt
   const userInput = req.body.userInput;
-  const firstPrompt = `${basePromptPrefix} \n ${userInput}\n`;
+  const initialPrompt = openAIFormatter(basePromptPrefix, userInput);
 
   try {
-    let [baseOutput, outputLength] = await callOpenAi(firstPrompt);
+    let [baseOutput, outputLength] = await callOpenAi(initialPrompt);
     let output = baseOutput;
     while (outputLength < 25) {
       console.log(`API: Response too short at ${outputLength}, trying again`);
-      let prompt = `${baseOutput}\n${secondTryPrefix} \n ${userInput}`;
 
-      [output, outputLength] = await callOpenAi(prompt);
+      let updatedPrompt = openAIFormatter(
+        secondTryPrefix,
+        userInput,
+        baseOutput
+      );
+
+      [output, outputLength] = await callOpenAi(updatedPrompt);
     }
 
     res.status(200).json({ output });
