@@ -52,7 +52,8 @@ const Home = () => {
           <Card isOpened={isOpened} />
         </div>
         <Button variant="contained">Hello world</Button>
-        {images && <ImageGallery images={images} />}
+        {/* {images && <ImageGallery images={images} />} */}
+        <ImageGallery />
       </Stack>
     </div>
   );

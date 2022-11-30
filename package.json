@@ -12,18 +12,14 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.16",
-    "bourbon": "4.3.4",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "framer-motion": "^6.5.1",
     "lexica-api": "^1.0.0",
     "next": "13.0.3",
-    "node-sass": "^8.0.0",
     "openai": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-grid-gallery": "^1.0.0",
-    "sass": "^1.56.1",
     "styled-components": "^5.3.6"
   }
 }

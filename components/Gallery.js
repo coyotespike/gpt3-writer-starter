@@ -3,15 +3,17 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
-export default function MasonryImageList({ images }) {
+export default function MasonryImageList({ images = itemData }) {
   return (
-    <Box sx={{ width: 500, height: 450, overflowY: "scroll" }}>
-      <ImageList variant="masonry" cols={3} gap={8}>
+    <Box sx={{ width: 700, height: 700, overflowY: "scroll" }}>
+      <ImageList variant="masonry" cols={2} gap={8}>
         {images.map((item) => (
           <ImageListItem key={item.src}>
             <img
               src={`${item.src}?w=248&fit=crop&auto=format`}
               srcSet={`${item.src}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              height={item.height}
+              width={item.width}
               loading="lazy"
             />
           </ImageListItem>
@@ -23,51 +25,63 @@ export default function MasonryImageList({ images }) {
 
 const itemData = [
   {
-    src: "https://images.unsplash.com/photo-1549388604-817d15aa0110",
-    title: "Bed",
+    src: "https://image.lexica.art/md/bac12345-00c5-4fbe-8bbd-f04b8a9abdae",
+    title: "Krampus",
+    altSrc: "https://lexica.art/prompt/ecf6e5b1-6866-4e05-a234-89ab152998f4",
   },
   {
-    src: "https://images.unsplash.com/photo-1525097487452-6278ff080c31",
-    title: "Books",
+    src: "https://image.lexica.art/md/36e3b304-ec0c-4e51-a054-bbad147b5a53",
+    altSrc: "https://lexica.art/prompt/d7495c99-c7c6-4947-9f72-2a7264ea1e37",
+    title: "Tim Burton",
   },
   {
-    src: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
-    title: "Sink",
+    src: "https://image.lexica.art/md/079ca508-a2f9-42be-9b33-e5e3a2d485c0",
+    altSrc: "https://lexica.art/prompt/e23a19a0-190b-41b6-8406-d27a83c2d9e5",
+    title: "Black Forest",
   },
   {
-    src: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3",
-    title: "Kitchen",
+    src: "https://image.lexica.art/md/fd87dc48-7ba9-4cfb-b89a-832da67fc933",
+    title: "Ugly Sweater",
+    altSrc: "https://lexica.art/prompt/e7e0ee3c-a263-46d5-ab2b-54429c24b2b1",
   },
   {
-    src: "https://images.unsplash.com/photo-1588436706487-9d55d73a39e3",
-    title: "Blinds",
+    src: "https://image.lexica.art/md/d4a9a296-c656-4e06-b908-8b5bd63701eb",
+    title: "Cardinal",
+    altSrc: "https://lexica.art/prompt/d088f1e5-3533-4c8b-8103-2412a4f64ad2",
   },
   {
-    src: "https://images.unsplash.com/photo-1574180045827-681f8a1a9622",
-    title: "Chairs",
+    src: "https://image.lexica.art/md/04e41afd-07cd-4651-b8e8-ac695823b9a5",
+    title: "scandi",
+    altSrc: "https://lexica.art/prompt/0b6f89f6-97ff-4d64-abf1-df68baa4b423",
   },
   {
-    src: "https://images.unsplash.com/photo-1530731141654-5993c3016c77",
-    title: "Laptop",
+    src: "https://image.lexica.art/md/4d340554-3771-464c-8cf3-0f4c10592cbe",
+    title: "zombies",
+    altSrc: "https://lexica.art/prompt/c7851035-0399-4255-9f3d-50765b27663a",
   },
   {
-    src: "https://images.unsplash.com/photo-1481277542470-605612bd2d61",
-    title: "Doors",
+    src: "https://image.lexica.art/md/7db4d997-6acd-4def-996b-5f5168ac70d6",
+    title: "cozy home",
+    altSrc: "https://lexica.art/prompt/cbe93f19-e0b2-4050-84be-e3d7d1e45dcd",
   },
   {
-    src: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7",
-    title: "Coffee",
+    src: "https://image.lexica.art/md/6508d366-4526-40fd-8223-1411fc45d6f1",
+    title: "beautiful christmas morning",
+    altSrc: "https://lexica.art/prompt/cec46d3b-3785-4234-87bc-0722085ca582",
   },
   {
-    src: "https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee",
-    title: "Storage",
+    src: "https://image.lexica.art/md/c08261ee-9d17-45f9-8342-ff1cb373f76b",
+    title: "Capuchin",
+    altSrc: "https://lexica.art/prompt/e17545c3-0963-4f03-84a5-4ddbd0b8cb95",
   },
   {
-    src: "https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62",
-    title: "Candle",
+    src: "https://image.lexica.art/md/8e043132-69c0-42e3-bfc3-f98d104495d2",
+    title: "swiss",
+    altSrc: "https://lexica.art/prompt/d7c1991f-4355-4e8e-a72f-f8658cad0731",
   },
   {
-    src: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
-    title: "Coffee table",
+    src: "https://image.lexica.art/md/ffb32e89-490d-4b57-a8bf-c45ba6030fc7",
+    title: "impressionist",
+    altSrc: "https://lexica.art/prompt/ff398812-1eee-4d05-ada4-87cdb4b3006e",
   },
 ];
