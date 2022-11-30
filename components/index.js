@@ -1,5 +1,6 @@
 import { Card } from "./Card";
 import { ClickIcon } from "./ClickIcon";
 import ImageGallery from "./Gallery";
+import BackgroundImage from "./BackgroundImage";
 
-export { Card, ClickIcon, ImageGallery };
+export { BackgroundImage, Card, ClickIcon, ImageGallery };

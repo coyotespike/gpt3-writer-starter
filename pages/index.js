@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Card, ImageGallery } from "../components";
+import { BackgroundImage, Card, ImageGallery } from "../components";
+import { Button, Grid, Item, Stack } from "@mui/material";
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
@@ -13,6 +14,7 @@ const Home = () => {
     async function fetchImages() {
       const response = await fetch("/api/lexica");
       const data = await response.json();
+      console.log(data.images[0]);
       setImages(data.images);
     }
     fetchImages();
@@ -44,11 +46,15 @@ const Home = () => {
   };
   return (
     <div>
-      <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
-        <Card isOpened={isOpened} />
-      </div>
+      <BackgroundImage />
+      <Stack justifyContent="center" alignItems="center" spacing={5}>
+        <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
+          <Card isOpened={isOpened} />
+        </div>
 
-      {/* {images && <ImageGallery images={images} />} */}
+        <Button variant="contained">Hello world</Button>
+        {/* {images && <ImageGallery images={images} />} */}
+      </Stack>
     </div>
   );
 };
