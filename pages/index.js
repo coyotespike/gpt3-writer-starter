@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { useState } from "react";
-import Image from "next/image";
-import buildspaceLogo from "../assets/buildspace-logo.png";
-import { Card } from "../components";
+import { useEffect, useState } from "react";
+import { Card, ImageGallery } from "../components";
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
@@ -10,6 +8,15 @@ const Home = () => {
   const [apiOutput, setApiOutput] = useState("");
 
   const [isOpened, setIsOpened] = useState(false);
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    async function fetchImages() {
+      const response = await fetch("/api/lexica");
+      const data = await response.json();
+      setImages(data.images);
+    }
+    fetchImages();
+  }, []);
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
@@ -36,8 +43,12 @@ const Home = () => {
     setUserInput(event.target.value);
   };
   return (
-    <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
-      <Card isOpened={isOpened} />
+    <div>
+      <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
+        <Card isOpened={isOpened} />
+      </div>
+
+      {/* {images && <ImageGallery images={images} />} */}
     </div>
   );
 };

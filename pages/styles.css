@@ -139,7 +139,7 @@
   border: 20px solid #d4d1d0;
   display: -webkit-box;
   display: -moz-box;
-  display: box;
+  display: flex;
   display: -moz-flex;
   display: flex;
   box-pack: center;
