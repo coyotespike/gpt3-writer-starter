@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { MerryChristmas } from "./MerryChristmas";
 import {
   StyledCard,
@@ -7,6 +6,7 @@ import {
   StyledCardInside,
   StyledCardBottom,
 } from "./CardPieces";
+import { ClickIcon } from "./ClickIcon";
 
 export const Card = ({ isOpened }) => {
   return (
@@ -15,6 +15,8 @@ export const Card = ({ isOpened }) => {
         <StyledOutsideCard />
         <StyledCardInside />
         <MerryChristmas />
+
+        <ClickIcon isOpened={isOpened} />
       </StyledCardFront>
 
       <StyledCardBottom>

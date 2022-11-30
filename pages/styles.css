@@ -239,7 +239,7 @@
     height: 48px;
   }
 }
-.click-icon.is-hidden {
+.is-hidden {
   opacity: 0;
 }
 

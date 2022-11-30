@@ -13,4 +13,5 @@ https://image.lexica.art/md/eb9e86f8-bb09-4273-a058-bf8de19a10e6
 -- Click to edit text or choose a different picture.
 
 ## Later
+- Get assets locally so they are bundled
 - Choose card style

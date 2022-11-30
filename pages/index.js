@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
 import buildspaceLogo from "../assets/buildspace-logo.png";
-import { Card } from "../components/Card";
+import { Card } from "../components";
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
@@ -36,8 +36,8 @@ const Home = () => {
     setUserInput(event.target.value);
   };
   return (
-    <div className="root">
-      <Card />
+    <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
+      <Card isOpened={isOpened} />
     </div>
   );
 };
