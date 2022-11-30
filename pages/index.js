@@ -51,9 +51,8 @@ const Home = () => {
         <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
           <Card isOpened={isOpened} />
         </div>
-
         <Button variant="contained">Hello world</Button>
-        {/* {images && <ImageGallery images={images} />} */}
+        {images && <ImageGallery images={images} />}
       </Stack>
     </div>
   );
