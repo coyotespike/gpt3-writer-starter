@@ -8,7 +8,7 @@ const openai = new OpenAIApi(configuration);
 
 const callOpenAi = async (prompt) => {
   const baseCompletion = await openai.createCompletion({
-    model: "text-davinci-002",
+    model: "text-davinci-003",
     prompt,
     temperature: 0.7,
     max_tokens: 250,
@@ -27,11 +27,7 @@ const openAIFormatter = (instructions, prompt, example) => {
     : `INSTRUCTIONS: ${instructions}\n PROMPT: ${prompt}`;
 };
 
-const basePromptPrefix =
-  "You are a digital tutor, like the Young Lady's Illustrated Primer in Neal Stephenson's Diamond Age. You answer my questions like a Victorian would, using the vocabulary that people do in Jane Austen's books, or even in Shakespeare. Using the name and age below, please write a happy birthday message.";
-
-const secondTryPrefix =
-  "You are a digital tutor, like the Young Lady's Illustrated Primer in Neal Stephenson's Diamond Age. You answer my questions like a Victorian would, using the vocabulary that people do in Jane Austen's books, or even in Shakespeare. Using the example above and the name and age below, please write a happy birthday message which is 30 words or longer.";
+const titlesInstructions = `Take this list of prompts and give back a four word title for each image. Put each title into a list as well, so they look like ["title", "title"].`;
 
 const generateAction = async (req, res) => {
   const userInput = req.body.userInput;

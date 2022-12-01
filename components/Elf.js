@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const elves = {
   firstElf: "/elf.webp",
-  secondElf: "/elf.webp",
-  thirdElf: "/elf.webp",
+  secondElf: "/elf2.webp",
+  thirdElf: "/elf3.webp",
 };
 
 const ElfImage = ({ variant = "firstElf" }) => {

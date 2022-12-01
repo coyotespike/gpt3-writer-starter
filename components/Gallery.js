@@ -5,10 +5,11 @@ export default function MasonryImageList({
   images = itemData,
   setSelectedImage,
 }) {
+  const imagesToMap = images.length ? images : itemData;
   return (
     <Box sx={{ width: 700, height: 700, overflowY: "scroll" }}>
       <ImageList variant="masonry" cols={2} gap={8}>
-        {images.map((item) => (
+        {imagesToMap.map((item) => (
           <ImageListItem key={item.src} onClick={() => setSelectedImage(item)}>
             <img
               src={`${item.src}?w=248&fit=crop&auto=format`}

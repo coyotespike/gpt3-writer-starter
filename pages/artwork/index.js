@@ -24,14 +24,23 @@ const ArtSelector = () => {
     }
   }
 
-  useEffect(() => {
-    async function fetchImages() {
-      const response = await fetch("/api/lexica");
-      const data = await response.json();
-      setImages(data.images);
-    }
-    // fetchImages();
-  }, []);
+  async function fetchImages(searchUrl = "") {
+    const response = await fetch(`/api/lexica?url=${searchUrl}`, {});
+    const data = await response.json();
+    setImages(data.images);
+  }
+
+  async function fetchTitles() {
+    const prompts = images.map((image) => image.prompt);
+
+    const response = await fetch(`/api/generate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompts }),
+    });
+  }
 
   return (
     <Stack alignItems="center" spacing={4}>
@@ -53,23 +62,26 @@ const ArtSelector = () => {
               xs={3}
               style={{ width: "100px", height: "200px", position: "relative" }}
             >
-              {selectedImage && <Elf variant="secondElf" />}
+              <Elf variant="secondElf" />
             </Grid>
             <Grid item xs={3}>
-              {selectedImage && (
-                <Stack>
-                  <Typography variant="h6">
-                    {selectedImage ? "You selected " + selectedImage.title : ""}
-                  </Typography>
-                  <Button variant="contained" color="success" size="large">
-                    Have the elves make it!
-                  </Button>
-                </Stack>
-              )}
+              <Stack>
+                <Typography variant="h6">
+                  {"You selected " + selectedImage.title}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="success"
+                  size="large"
+                  onClick={() => fetchImages(selectedImage.src)}
+                >
+                  Have the elves make it!
+                </Button>
+              </Stack>
             </Grid>
           </>
         ) : (
-          <Grid item xs={6}>
+          <Grid item xs={6} style={{ height: "200px" }}>
             <Typography variant="h5">
               We'll send it off to the robot elves to generate a brand-new
               picture for you
@@ -78,8 +90,10 @@ const ArtSelector = () => {
         )}
         <Grid item xs={3}></Grid>
       </Grid>
-      {/* {images && <ImageGallery images={images} />} */}
-      <ImageGallery setSelectedImage={setOrUnsetSelectedImage} />
+      <ImageGallery
+        setSelectedImage={setOrUnsetSelectedImage}
+        images={images}
+      />
     </Stack>
   );
 };

@@ -11,7 +11,7 @@ export default function Document() {
           key="description"
         />
       </Head>
-      <body class="body">
+      <body className="body">
         <Main />
         <NextScript />
       </body>
