@@ -16,6 +16,14 @@ const ArtSelector = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  function setOrUnsetSelectedImage(image) {
+    if (!selectedImage || selectedImage.src !== image.src) {
+      setSelectedImage(image);
+    } else {
+      setSelectedImage(null);
+    }
+  }
+
   useEffect(() => {
     async function fetchImages() {
       const response = await fetch("/api/lexica");
@@ -41,17 +49,35 @@ const ArtSelector = () => {
         We'll send it off to the robot elves to generate a brand-new picture for
         you
       </Typography>
-      <div style={{ width: "100px", height: "200px", position: "relative" }}>
-        <Elf variant="secondElf" />
-      </div>
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
+        <Grid item xs={3} />
+        <Grid
+          item
+          xs={3}
+          style={{ width: "100px", height: "200px", position: "relative" }}
+        >
+          <Elf variant="secondElf" />
+        </Grid>
+        <Grid item xs={3}>
+          <Stack>
+            <Typography variant="h6">
+              {selectedImage ? "You selected " + selectedImage.title : ""}
+            </Typography>
+            <Button variant="contained" color="success" size="large">
+              Have the elves make it!
+            </Button>
+          </Stack>
+        </Grid>
 
+        <Grid item xs={3}></Grid>
+      </Grid>
       <Link href="/messages" style={{ textDecoration: "none" }}>
         <Button variant="contained" color="success" size="large">
           Get started!
         </Button>
       </Link>
       {/* {images && <ImageGallery images={images} />} */}
-      <ImageGallery setSelectedImage={setSelectedImage} />
+      <ImageGallery setSelectedImage={setOrUnsetSelectedImage} />
     </Stack>
   );
 };
