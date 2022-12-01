@@ -16,6 +16,8 @@ https://image.lexica.art/md/eb9e86f8-bb09-4273-a058-bf8de19a10e6
 - Get assets locally so they are bundled
 - Choose card style
 - Option to upload your own art or prompt
+- More copy for landing page
+- Filter images for the nsfw tag
 
 ## Pages
 Landing Page
