@@ -20,6 +20,7 @@ https://image.lexica.art/md/eb9e86f8-bb09-4273-a058-bf8de19a10e6
 - Filter images for the nsfw tag
 - I'm feeling lucky button
 - Feedback form
+- Generate titles, when we finish Messages
 
 ## Pages
 Landing Page

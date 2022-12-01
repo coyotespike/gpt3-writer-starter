@@ -11,10 +11,17 @@ import {
 } from "@mui/material";
 
 import { Elf, ImageGallery } from "components";
+import { useGlobalContext } from "../Context";
 
 const ArtSelector = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [fetchedImages, setFetchedImages] = useState(false);
+
+  const [state, setGlobalState] = useGlobalContext();
+  useEffect(() => {
+    setGlobalState("selectedImage", selectedImage);
+  }, [selectedImage]);
 
   function setOrUnsetSelectedImage(image) {
     if (!selectedImage || selectedImage.src !== image.src) {
@@ -28,6 +35,7 @@ const ArtSelector = () => {
     const response = await fetch(`/api/lexica?url=${searchUrl}`, {});
     const data = await response.json();
     setImages(data.images);
+    setFetchedImages(!fetchedImages);
   }
 
   async function fetchTitles() {
@@ -40,7 +48,17 @@ const ArtSelector = () => {
       },
       body: JSON.stringify({ prompts }),
     });
+    const data = await response.json();
+    const titles = data.titles;
+    const imagesWithTitles = images.map((image, index) => ({
+      ...image,
+      title: titles[index],
+    }));
+    setImages(imagesWithTitles);
   }
+  // useEffect(() => {
+  //   fetchTitles();
+  // }, [fetchedImages]);
 
   return (
     <Stack alignItems="center" spacing={4}>
@@ -75,7 +93,12 @@ const ArtSelector = () => {
                   size="large"
                   onClick={() => fetchImages(selectedImage.src)}
                 >
-                  Have the elves make it!
+                  Have the elves make more like it!
+                </Button>
+
+                <Typography variant="body">OR</Typography>
+                <Button variant="contained" color="primary" size="large">
+                  Let's use this one!
                 </Button>
               </Stack>
             </Grid>

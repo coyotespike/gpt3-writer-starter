@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import "./styles.css";
 
 import { BackgroundImage, Card, ImageGallery } from "../components";
+import { ContextProvider } from "./Context";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -13,11 +14,13 @@ const GlobalStyle = createGlobalStyle`
 function App({ Component, pageProps }) {
   return (
     <Fragment>
-      <div>
-        <BackgroundImage />
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </div>
+      <ContextProvider>
+        <div>
+          <BackgroundImage />
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </div>
+      </ContextProvider>
     </Fragment>
   );
 }
