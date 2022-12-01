@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import { Fragment } from "react";
 import "./styles.css";
 
+import { BackgroundImage, Card, ImageGallery } from "../components";
+
 const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
@@ -11,8 +13,11 @@ const GlobalStyle = createGlobalStyle`
 function App({ Component, pageProps }) {
   return (
     <Fragment>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <div>
+        <BackgroundImage />
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </div>
     </Fragment>
   );
 }
