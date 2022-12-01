@@ -7,20 +7,24 @@ import {
   StyledCardBottom,
 } from "./CardPieces";
 import { ClickIcon } from "./ClickIcon";
+import ElfImage from "./Elf";
 
 export const Card = ({ isOpened }) => {
   return (
     <StyledCard isOpened={isOpened}>
       <StyledCardFront>
         <StyledOutsideCard />
-        <StyledCardInside />
-        <MerryChristmas />
-
+        <StyledCardInside>
+          <ElfImage />
+        </StyledCardInside>
         <ClickIcon isOpened={isOpened} />
       </StyledCardFront>
 
       <StyledCardBottom>
-        <p>Lorem ipsum dolor. Sit Amet</p>
+        <p>
+          This year, ask our robotic elves to make original artwork and messages
+          for you! They'll even mail a physical card to your loved ones!
+        </p>
       </StyledCardBottom>
     </StyledCard>
   );
