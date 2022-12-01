@@ -44,38 +44,40 @@ const ArtSelector = () => {
       <Typography variant="h4">
         Select an example to start your custom card!
       </Typography>
-      <Typography variant="h6">
-        {" "}
-        We'll send it off to the robot elves to generate a brand-new picture for
-        you
-      </Typography>
       <Grid container spacing={1} alignItems="center" justifyContent="center">
         <Grid item xs={3} />
-        <Grid
-          item
-          xs={3}
-          style={{ width: "100px", height: "200px", position: "relative" }}
-        >
-          <Elf variant="secondElf" />
-        </Grid>
-        <Grid item xs={3}>
-          <Stack>
-            <Typography variant="h6">
-              {selectedImage ? "You selected " + selectedImage.title : ""}
+        {selectedImage ? (
+          <>
+            <Grid
+              item
+              xs={3}
+              style={{ width: "100px", height: "200px", position: "relative" }}
+            >
+              {selectedImage && <Elf variant="secondElf" />}
+            </Grid>
+            <Grid item xs={3}>
+              {selectedImage && (
+                <Stack>
+                  <Typography variant="h6">
+                    {selectedImage ? "You selected " + selectedImage.title : ""}
+                  </Typography>
+                  <Button variant="contained" color="success" size="large">
+                    Have the elves make it!
+                  </Button>
+                </Stack>
+              )}
+            </Grid>
+          </>
+        ) : (
+          <Grid item xs={6}>
+            <Typography variant="h5">
+              We'll send it off to the robot elves to generate a brand-new
+              picture for you
             </Typography>
-            <Button variant="contained" color="success" size="large">
-              Have the elves make it!
-            </Button>
-          </Stack>
-        </Grid>
-
+          </Grid>
+        )}
         <Grid item xs={3}></Grid>
       </Grid>
-      <Link href="/messages" style={{ textDecoration: "none" }}>
-        <Button variant="contained" color="success" size="large">
-          Get started!
-        </Button>
-      </Link>
       {/* {images && <ImageGallery images={images} />} */}
       <ImageGallery setSelectedImage={setOrUnsetSelectedImage} />
     </Stack>
