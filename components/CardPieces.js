@@ -1,5 +1,9 @@
 import styled, { css, keyframes } from "styled-components";
 
+/**
+   Made with thanks to https://codepen.io/lukasz-niedzwiecki/pen/ZBNmpy
+   **/
+
 const cardIn = keyframes`
   0% {
     opacity: 0;

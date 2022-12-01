@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 function App({ Component, pageProps }) {
   return (
     <Fragment>
+      <GlobalStyle />
       <Component {...pageProps} />
     </Fragment>
   );

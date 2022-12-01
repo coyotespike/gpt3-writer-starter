@@ -2,6 +2,22 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { BackgroundImage, Card, ImageGallery } from "../components";
 import { Button, Grid, Item, Stack } from "@mui/material";
+import emoji from "node-emoji";
+
+const Emoji = (props) => {
+  const symbol = emoji.get(props.name);
+
+  return (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.name}
+      aria-hidden={false}
+    >
+      {symbol}
+    </span>
+  );
+};
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
@@ -14,10 +30,9 @@ const Home = () => {
     async function fetchImages() {
       const response = await fetch("/api/lexica");
       const data = await response.json();
-      console.log(data.images[0]);
       setImages(data.images);
     }
-    fetchImages();
+    // fetchImages();
   }, []);
 
   const callGenerateEndpoint = async () => {
@@ -47,13 +62,21 @@ const Home = () => {
   return (
     <div>
       <BackgroundImage />
-      <Stack justifyContent="center" alignItems="center" spacing={5}>
+      <Stack justifyContent="center" alignItems="center" spacing={10}>
+        <div className="is-hidden">for vertical spacing</div>
         <div onClick={() => setIsOpened((isOpened) => !isOpened)}>
           <Card isOpened={isOpened} />
         </div>
-        <Button variant="contained">Hello world</Button>
+        <Button
+          variant="contained"
+          color="success"
+          size="large"
+          startIcon={<Emoji name="snowman" />}
+        >
+          Get started!
+        </Button>
         {/* {images && <ImageGallery images={images} />} */}
-        <ImageGallery />
+        {/* <ImageGallery /> */}
       </Stack>
     </div>
   );
