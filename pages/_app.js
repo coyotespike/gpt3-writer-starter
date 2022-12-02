@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import "./styles.css";
 
 import { BackgroundImage, Card, ImageGallery } from "../components";
-import { ContextProvider } from "./Context";
+import { ContextProvider } from "utils/Context";
 
 const GlobalStyle = createGlobalStyle`
 * {

@@ -5,7 +5,7 @@ import { Grid, Stack, Box } from "@mui/material";
 import getStripe from "./getStripe";
 import ElementsForm from "../../components/CheckoutForm";
 
-const DonatePage = () => {
+const CheckoutPage = () => {
   const [paymentIntent, setPaymentIntent] = useState(null);
 
   const fetchPaymentIntent = async () => {
@@ -74,31 +74,4 @@ const DonatePage = () => {
   );
 };
 
-//   return (
-//     <>
-//       {paymentIntent ? (
-//         <Grid alignItems="center" container>
-//           <Grid item xs={3} />
-//           <Grid item xs={5} sx={{ m: 6 }}>
-//             <Elements
-//               stripe={getStripe()}
-//               options={{
-//                 appearance,
-//                 clientSecret: paymentIntent,
-//               }}
-//             >
-//               <ElementsForm />
-//             </Elements>
-//           </Grid>
-
-//           <Grid item xs={3} />
-//         </Grid>
-//       ) : (
-//         <p>Loading...</p>
-//       )}
-//     </>
-//   );
-// }
-// ;
-
-export default DonatePage;
+export default CheckoutPage;
