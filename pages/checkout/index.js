@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { Grid, Stack, Box } from "@mui/material";
 
-import getStripe from "./getStripe";
-import ElementsForm from "../../components/CheckoutForm";
+import getStripe from "utils/getStripe";
+import ElementsForm from "components/CheckoutForm";
 
 const CheckoutPage = () => {
   const [paymentIntent, setPaymentIntent] = useState(null);

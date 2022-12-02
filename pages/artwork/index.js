@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 import { Elf, ImageGallery } from "components";
-import { useGlobalContext } from "../Context";
+import { useGlobalContext } from "utils/Context";
 
 const ArtSelector = () => {
   const [images, setImages] = useState([]);
