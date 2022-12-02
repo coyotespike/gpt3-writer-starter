@@ -10,7 +10,7 @@ const callOpenAi = async (prompt) => {
   const baseCompletion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt,
-    temperature: 0.7,
+    temperature: 0.8,
     max_tokens: 250,
   });
 
@@ -29,26 +29,29 @@ const openAIFormatter = (instructions, prompt, example) => {
 
 const titlesInstructions = `Take this list of prompts and give back a four word title for each image. Put each title into a list as well, so they look like ["title", "title"].`;
 
+const christmasCardInstructions = (
+  title,
+  fromNames,
+  toNames,
+  isPoem = false,
+) => {
+  return `A Christmas card has a picture on the front with the title ${title}. The card is from ${fromNames}, and addressed to ${toNames}. Write a creative and warm ${
+    isPoem ? "rhyming poem" : "message"
+  } with a joke based on the picture title. Don't put the title in the message.`;
+};
+
 const generateAction = async (req, res) => {
-  const userInput = req.body.userInput;
-  const initialPrompt = openAIFormatter(basePromptPrefix, userInput);
-
   try {
-    let [baseOutput, outputLength] = await callOpenAi(initialPrompt);
-    let output = baseOutput;
-    while (outputLength < 25) {
-      console.log(`API: Response too short at ${outputLength}, trying again`);
+    const { title, fromNames, toNames, isPoem } = req.body;
+    const instructions = christmasCardInstructions(
+      title,
+      fromNames,
+      toNames,
+      isPoem,
+    );
+    const [response, responseLength] = await callOpenAi(instructions);
 
-      let updatedPrompt = openAIFormatter(
-        secondTryPrefix,
-        userInput,
-        baseOutput
-      );
-
-      [output, outputLength] = await callOpenAi(updatedPrompt);
-    }
-
-    res.status(200).json({ output });
+    res.status(200).json({ output: response });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

@@ -77,32 +77,34 @@ const ArtSelector = () => {
           <>
             <Grid
               item
-              xs={3}
+              xs={2}
               style={{ width: "100px", height: "200px", position: "relative" }}
             >
               <Elf variant="secondElf" />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Stack alignItems="center">
                 <Typography variant="h6">
                   {"You selected " + selectedImage.title}
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="success"
-                  size="large"
-                  onClick={() => fetchImages(selectedImage.src)}
-                >
-                  Have the elves make more like it!
-                </Button>
 
-                <Typography variant="body">OR</Typography>
-
-                <Link href="/messages" style={{ textDecoration: "none" }}>
-                  <Button variant="contained" color="primary" size="large">
-                    Let's use this one!
+                <Box>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => fetchImages(selectedImage.src)}
+                  >
+                    Get More Like This
                   </Button>
-                </Link>
+
+                  <Typography variant="body">OR</Typography>
+
+                  <Link href="/messages" style={{ textDecoration: "none" }}>
+                    <Button variant="contained" color="primary">
+                      Let's use this one!
+                    </Button>
+                  </Link>
+                </Box>
               </Stack>
             </Grid>
           </>

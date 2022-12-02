@@ -21,6 +21,7 @@ https://image.lexica.art/md/eb9e86f8-bb09-4273-a058-bf8de19a10e6
 - I'm feeling lucky button
 - Feedback form
 - Generate titles, when we finish Messages
+- Add poem option
 
 ## Pages
 Landing Page
