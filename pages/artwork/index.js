@@ -83,7 +83,7 @@ const ArtSelector = () => {
               <Elf variant="secondElf" />
             </Grid>
             <Grid item xs={3}>
-              <Stack>
+              <Stack alignItems="center">
                 <Typography variant="h6">
                   {"You selected " + selectedImage.title}
                 </Typography>
@@ -97,14 +97,17 @@ const ArtSelector = () => {
                 </Button>
 
                 <Typography variant="body">OR</Typography>
-                <Button variant="contained" color="primary" size="large">
-                  Let's use this one!
-                </Button>
+
+                <Link href="/messages" style={{ textDecoration: "none" }}>
+                  <Button variant="contained" color="primary" size="large">
+                    Let's use this one!
+                  </Button>
+                </Link>
               </Stack>
             </Grid>
           </>
         ) : (
-          <Grid item xs={6} style={{ height: "200px" }}>
+          <Grid item xs={6} style={{ height: "250px" }}>
             <Typography variant="h5">
               We'll send it off to the robot elves to generate a brand-new
               picture for you
