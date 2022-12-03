@@ -112,6 +112,8 @@ const Messages = () => {
           <Typography>
             {message
               ? message
+              : isGenerating
+              ? "Scribbling away up at the North Pole..."
               : "The elves will write your message here after you put your names in the boxes above. But you can edit it when they're done or just write your own message!"}
           </Typography>
         </Paper>

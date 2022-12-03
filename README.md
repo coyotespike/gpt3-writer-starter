@@ -20,11 +20,17 @@ https://image.lexica.art/md/eb9e86f8-bb09-4273-a058-bf8de19a10e6
 - Filter images for the nsfw tag
 - I'm feeling lucky button
 - Feedback form
-- Generate titles, when we finish Messages
-- Add poem option
 
 ## Pages
 Landing Page
 Art Selection Page
 Text Generation Page
 Preview/Address/Payment Page
+
+## Functions
+- [x] Generate titles, when we finish Messages
+- [x] Handle generate errors
+- [ ] Add poem option
+- Address to payment page
+- Save to servers or something
+- Call the card sender api

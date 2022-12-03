@@ -13,6 +13,10 @@ import {
 import { Elf, ImageGallery } from "components";
 import { useGlobalContext } from "utils/Context";
 
+const prepImages = (images) => {
+  return images.map((image) => ` PROMPT: ${image.prompt}`);
+};
+
 const ArtSelector = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -39,26 +43,30 @@ const ArtSelector = () => {
   }
 
   async function fetchTitles() {
-    const prompts = images.map((image) => image.prompt);
+    const prompts = prepImages(images);
 
     const response = await fetch(`/api/generate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "request-type": "generateTitles",
       },
       body: JSON.stringify({ prompts }),
     });
     const data = await response.json();
-    const titles = data.titles;
+    const titles = data.output;
+    console.log(titles);
     const imagesWithTitles = images.map((image, index) => ({
       ...image,
-      title: titles[index],
+      title: titles[index] || "A Christmas Scene",
     }));
     setImages(imagesWithTitles);
   }
-  // useEffect(() => {
-  //   fetchTitles();
-  // }, [fetchedImages]);
+  useEffect(() => {
+    if (images.length) {
+      fetchTitles();
+    }
+  }, [fetchedImages]);
 
   return (
     <Stack alignItems="center" spacing={4}>
@@ -73,49 +81,45 @@ const ArtSelector = () => {
       </Typography>
       <Grid container spacing={1} alignItems="center" justifyContent="center">
         <Grid item xs={3} />
-        {selectedImage ? (
-          <>
-            <Grid
-              item
-              xs={2}
-              style={{ width: "100px", height: "200px", position: "relative" }}
-            >
-              <Elf variant="secondElf" />
-            </Grid>
-            <Grid item xs={4}>
-              <Stack alignItems="center">
-                <Typography variant="h6">
-                  {"You selected " + selectedImage.title}
-                </Typography>
-
-                <Box>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={() => fetchImages(selectedImage.src)}
-                  >
-                    Get More Like This
-                  </Button>
-
-                  <Typography variant="body">OR</Typography>
-
-                  <Link href="/messages" style={{ textDecoration: "none" }}>
-                    <Button variant="contained" color="primary">
-                      Let's use this one!
-                    </Button>
-                  </Link>
-                </Box>
-              </Stack>
-            </Grid>
-          </>
-        ) : (
-          <Grid item xs={6} style={{ height: "250px" }}>
-            <Typography variant="h5">
-              We'll send it off to the robot elves to generate a brand-new
-              picture for you
+        <Grid
+          item
+          xs={2}
+          style={{ width: "100px", height: "200px", position: "relative" }}
+        >
+          <Elf variant="secondElf" />
+        </Grid>
+        <Grid item xs={4}>
+          <Stack alignItems="center">
+            <Typography variant="h6">
+              {selectedImage
+                ? "You selected " + selectedImage.title
+                : "Choose a picture below"}
             </Typography>
-          </Grid>
-        )}
+
+            <Box>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => fetchImages(selectedImage.src)}
+                disabled={!selectedImage}
+              >
+                Get More Like This
+              </Button>
+
+              <Typography variant="body">OR</Typography>
+
+              <Link href="/messages" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={!selectedImage}
+                >
+                  Let's use this one!
+                </Button>
+              </Link>
+            </Box>
+          </Stack>
+        </Grid>
         <Grid item xs={3}></Grid>
       </Grid>
       <ImageGallery
